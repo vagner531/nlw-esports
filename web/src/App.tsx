@@ -8,6 +8,7 @@ import './styles/main.css';
 import logoImg from './assets/img/logo.svg';
 import { CreateAdBanner } from './components/CreateAdBanner';
 import { CreateAdModal } from './components/CreateAdModal';
+import axios from 'axios';
 
 interface Game {
   id: string;
@@ -22,10 +23,8 @@ function App() {
   const [games, setgames] = useState<Game[]>([])
 
   useEffect(() => {
-    fetch('http://localhost:3333/games')
-      .then(response => response.json())
-      .then(data => {
-        setgames(data)
+    axios('http://localhost:3333/games').then(response => {
+        setgames(response.data)
       })
   }, [])
 
